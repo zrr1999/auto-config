@@ -13,19 +13,50 @@ requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "MIT"}
 
+[project.optional-dependencies]
+
 [project.scripts]
-auto-config = "auto_config:app"
+auto-config = "auto_config.__main__:app"
 
 [tool.pdm.version]
 source = "scm"
 write_to = "auto_config/__version__.py"
 write_template = "__version__ = '{}'"
 
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest",
+    "pytest-mock",
+    "converage",
+]
+
 [tool.pdm.build]
 excludes = ["./**/.git"]
 includes = ["auto_config"]
 source-includes = ["tests", "LICENSE", "README.md"]
 editable-backend = "path"
+
+[tool.ruff]
+line-length = 120
+extend-select = [
+  "I",    # isort
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "PGH",  # pygrep-hooks
+  "RUF",  # ruff
+  "W",    # pycodestyle
+  "YTT",  # flake8-2020
+]
+src = ["auto_config", "tests"]
+exclude = ["tests/fixtures"]
+target-version = "py38"
+
+[tool.ruff.isort]
+known-first-party = ["auto_config"]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"] # Ignore unused imports in __init__.py
 
 [build-system]
 requires = ["pdm-backend"]
