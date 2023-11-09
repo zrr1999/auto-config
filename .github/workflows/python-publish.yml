@@ -23,11 +23,11 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - uses: actions/checkout@v3
-    - name: Install pdm
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup PDM
       uses: pdm-project/setup-pdm@v3
       with:
         python-version: ${{ matrix.python-version }}
-        cache: true
     - name: Publish package distributions to PyPI
       run: pdm publish
