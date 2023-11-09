@@ -1,0 +1,27 @@
+[project]
+name = "auto-config"
+version = "0.1.0"
+description = "auto config for my personal devices"
+authors = [
+    {name = "Zhan Rongrui", email = "2742392377@qq.com"},
+]
+dependencies = [
+    "typer",
+    "tencentcloud-sdk-python-dnspod"
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.scripts]
+auto-config = "auto_config:app"
+
+[tool.pdm.build]
+excludes = ["./**/.git"]
+includes = ["auto_config"]
+source-includes = ["tests", "LICENSE", "README.md"]
+editable-backend = "path"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
