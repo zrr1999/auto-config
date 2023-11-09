@@ -1,6 +1,6 @@
 [project]
 name = "auto-config"
-version = "0.1.0"
+dynamic = ["version"]
 description = "auto config for my personal devices"
 authors = [
     {name = "Zhan Rongrui", email = "2742392377@qq.com"},
@@ -15,6 +15,11 @@ license = {text = "MIT"}
 
 [project.scripts]
 auto-config = "auto_config:app"
+
+[tool.pdm.version]
+source = "scm"
+write_to = "auto_config/__version__.py"
+write_template = "__version__ = '{}'"
 
 [tool.pdm.build]
 excludes = ["./**/.git"]
