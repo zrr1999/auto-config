@@ -8,7 +8,7 @@ authors = [
 dependencies = [
     "typer"
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -27,6 +27,8 @@ test = [
     "pytest",
     "pytest-mock",
     "converage",
+
+    "libcst",
 ]
 
 [tool.pdm.build]
@@ -48,7 +50,10 @@ extend-select = [
 ]
 src = ["auto_config", "tests"]
 exclude = ["tests/fixtures"]
-target-version = "py38"
+target-version = "py39"
+ignore = [
+    "F841"
+]
 
 [tool.ruff.isort]
 known-first-party = ["auto_config"]

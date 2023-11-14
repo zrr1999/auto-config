@@ -18,7 +18,7 @@ jobs:
   deploy:
     strategy:
       matrix:
-        python-version: [3.12]
+        python-version: [3.11, 3.12]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -29,5 +29,12 @@ jobs:
       uses: pdm-project/setup-pdm@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: pdm install
+    - name: Downgrade source code
+      run: |
+        if [[ $(python -V) != *"3.12"* ]]; then
+           python auto_config/experimental/downgrade_python.py
+        fi
     - name: Publish package distributions to PyPI
       run: pdm publish
