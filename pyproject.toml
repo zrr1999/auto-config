@@ -26,7 +26,7 @@ write_template = "__version__ = '{}'"
 test = [
     "pytest",
     "pytest-mock",
-    "converage",
+    "coverage",
 
     "libcst",
 ]
