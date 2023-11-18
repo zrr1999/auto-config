@@ -37,7 +37,6 @@ test = [
 
 [tool.pdm.build]
 includes = ["auto_config"]
-editable-backend = "path"
 
 [tool.ruff]
 line-length = 120
