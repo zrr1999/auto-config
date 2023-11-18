@@ -8,9 +8,13 @@ authors = [
 dependencies = [
     "typer"
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 readme = "README.md"
 license = {text = "MIT"}
+
+[project.urls]
+Homepage = "https://pypi.org/project/auto-config"
+Repository = "https://github.com/zrr1999/auto-config.git"
 
 [project.optional-dependencies]
 
@@ -32,9 +36,7 @@ test = [
 ]
 
 [tool.pdm.build]
-excludes = ["./**/.git"]
 includes = ["auto_config"]
-source-includes = ["tests", "LICENSE", "README.md"]
 editable-backend = "path"
 
 [tool.ruff]
@@ -63,5 +65,5 @@ required-imports = ["from __future__ import annotations"]
 "__init__.py" = ["F401"] # Ignore unused imports in __init__.py
 
 [build-system]
-requires = ["pdm-backend"]
+requires = ["pdm-backend", "pdm-pyfuture"]
 build-backend = "pdm.backend"
