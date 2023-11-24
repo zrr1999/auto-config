@@ -20,9 +20,11 @@ class SSHHostsGenerator(GeneratorBase):
                 logger.warning(f"device {device} has no ssh config")
                 continue
             self.add_line(f"Host {device.get_name()}")
-            self.add_line(f"  HostName {device.get_target()}.bone6.top")
+            self.add_line(f"  HostName {device.get_domain()}.bone6.top")
             self.add_line(f"  Port {device.extra.ssh.port}")
             self.add_line(f"  User {device.extra.ssh.user}")
             self.add_line(f"  ForwardAgent {"yes" if device.extra.ssh.forward_agent else "no"}")
             self.add_line(f"  #_Desc {device.desc}")
             self.add_line()
+
+        super().generate()

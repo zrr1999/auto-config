@@ -15,6 +15,6 @@ def test_get_name():
     assert device.get_name() == "group1-hardware1-system1"
 
 
-def test_get_target():
+def test_get_domain():
     device = Device(system="system1", hardware="hardware1", group="group1", main=True, desc="")
-    assert device.get_target() == "hardware1-system1.ssh.group1"
+    assert device.get_domain() == "hardware1-system1.ssh.group1"

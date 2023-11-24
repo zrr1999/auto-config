@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from .device import Device
 from .field import BaseExtraField, DefaultExtraField
 from .generator import AnsibleHostsGenerator, DNSConfigGenerator, SSHHostsGenerator
+from .service import Service
 
 
 def get_devices[T: BaseExtraField](
@@ -24,6 +25,13 @@ def get_devices[T: BaseExtraField](
             logger.warning(f"device {device} has invalid extra field")
             continue
     return devices
+
+
+def get_services(services_config: list[dict]) -> list[Service]:
+    services = []
+    for service in services_config:
+        services.append(Service.model_validate(service))
+    return services
 
 
 def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level="INFO"):

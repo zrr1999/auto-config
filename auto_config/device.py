@@ -17,5 +17,5 @@ class Device[ExtraT: BaseExtraField](BaseModel):
     def get_name(self):
         return f"{self.group}-{self.hardware}-{self.system}"
 
-    def get_target(self):
+    def get_domain(self):
         return f"{self.hardware}-{self.system}.ssh.{self.group}"

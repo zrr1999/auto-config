@@ -32,3 +32,4 @@ class AnsibleHostsGenerator(GeneratorBase):
             for host in hosts:
                 self.add_line(host)
             self.add_line()
+        super().generate()

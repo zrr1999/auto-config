@@ -17,7 +17,7 @@ class DNSConfigGenerator(GeneratorBase):
     def generate(self):
         record_list = []
         for device in self.devices:
-            name = device.get_target()
+            name = device.get_domain()
             if device.extra.dns is not None:
                 target = device.extra.dns.target
                 if re.match(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", target):
@@ -31,4 +31,4 @@ class DNSConfigGenerator(GeneratorBase):
                 record_list.append((device.group, "CNAME", f"{name}.bone6.top"))
             record_list.append((f"{name}", record_type, target))
 
-        self.generated_code = json.dumps({"domain": "bone6.top", "records": record_list}, indent=2)
+        self._generated_code = json.dumps({"domain": "bone6.top", "records": record_list}, indent=2)
