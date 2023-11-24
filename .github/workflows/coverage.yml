@@ -13,16 +13,12 @@ env:
 permissions:
   contents: read
 
-concurrency:
-  group: "${{ github.workflow }}-${{ github.ref }}"
-  cancel-in-progress: true
-
 jobs:
   coverage:
     runs-on: ubuntu-latest"
 
     steps:
-      - name: Check out the repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup PDM
@@ -33,9 +29,7 @@ jobs:
       - name: Install dependencies
         run: pdm install
 
-      - name: "Combine data"
-        env:
-          COVERAGE_RCFILE: "metacov.ini"
+      - name: Run tests and coverage
         run: |
           pdm run coverage combine
           coverage html --show-contexts --title "Coverage for ${{ github.sha }}"
