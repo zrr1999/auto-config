@@ -14,6 +14,7 @@ class SSHField(BaseModel):
 
 
 class AnsibleField(BaseModel):
+    router: bool = False
     aliases: list[str] = Field(default_factory=list)
 
 

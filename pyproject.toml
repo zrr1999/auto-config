@@ -8,7 +8,8 @@ authors = [
 dependencies = [
     "pydantic",
     "typer",
-    "loguru"
+    "loguru",
+    "toml"
 ]
 requires-python = ">=3.8"
 readme = "README.md"
