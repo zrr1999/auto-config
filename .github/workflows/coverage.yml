@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  PIP_DISABLE_PIP_VERSION_CHECK: 1
-  FORCE_COLOR: 1    # Get colored pytest output
-
 permissions:
   contents: read
 

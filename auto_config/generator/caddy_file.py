@@ -2,28 +2,20 @@ from __future__ import annotations
 
 from typing import Sequence
 
-from ..device import Device
-from ..field import DefaultExtraField
+from ..service import Service
 from .base import GeneratorBase
 
 
 class CaddyFileGenerator(GeneratorBase):
-    def __init__(self, devices: Sequence[Device[DefaultExtraField]]):
+    def __init__(self, services: Sequence[Service]):
         super().__init__()
-        self.devices = devices
+        self.services = services
 
-    # def generate(self):
-    #     hosts = {}
-    #     for dev in self.devices:
-    #         hosts.setdefault(dev.group, [])
-    #         hosts[dev.group].append(dev.get_name())
-    #         if dev.extra.ansible is not None:
-    #             for alias in dev.extra.ansible.aliases:
-    #                 hosts.setdefault(alias, [])
-    #                 hosts[alias].append(dev.get_name())
-
-    #     for group, hosts in hosts.items():
-    #         self.add_line(f"[{group}]")
-    #         for host in hosts:
-    #             self.add_line(host)
-    #         self.add_line()
+    def generate(self):
+        for service in self.services:
+            self.add_block(f"{service.get_domain()}.bone6.top {{", "}", indentation=4)
+            self.add_line(f"reverse_proxy {service.target}")
+            self.add_line("tls {")
+            self.add_line("    dns dnspod {$DNSPOD_ID},{$DNSPOD_TOKEN}")
+            self.add_line("}")
+        super().generate()
