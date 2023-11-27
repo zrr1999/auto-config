@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import re
 from typing import Sequence
 
 from ..device import Device
@@ -20,15 +19,10 @@ class DNSConfigGenerator(GeneratorBase):
             name = device.get_domain()
             if device.extra.dns is not None:
                 target = device.extra.dns.target
-                if re.match(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", target):
-                    record_type = "A"
-                else:
-                    record_type = "CNAME"
             else:
-                target = "0.0.0.0"
-                record_type = "A"
+                target = "unknown"
             if device.main:
-                record_list.append((device.group, "CNAME", f"{name}.bone6.top"))
-            record_list.append((f"{name}", record_type, target))
+                record_list.append((device.group, f"{name}.bone6.top"))
+            record_list.append((f"{name}", target))
 
         self._generated_code = json.dumps({"domain": "bone6.top", "records": record_list}, indent=2)
