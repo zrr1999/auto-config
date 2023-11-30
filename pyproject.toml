@@ -41,7 +41,12 @@ includes = ["auto_config"]
 
 [tool.ruff]
 line-length = 120
-extend-select = [
+src = ["auto_config", "tests"]
+exclude = ["tests/fixtures"]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
   "I",    # isort
   "B",    # flake8-bugbear
   "C4",   # flake8-comprehensions
@@ -50,18 +55,15 @@ extend-select = [
   "W",    # pycodestyle
   "YTT",  # flake8-2020
 ]
-src = ["auto_config", "tests"]
-exclude = ["tests/fixtures"]
-target-version = "py39"
 ignore = [
     "F841"
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["auto_config"]
 required-imports = ["from __future__ import annotations"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"] # Ignore unused imports in __init__.py
 
 [build-system]
