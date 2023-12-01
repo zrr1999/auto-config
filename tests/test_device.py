@@ -6,9 +6,6 @@ from loguru import logger
 
 from auto_config.device import Device
 
-logger.remove()
-logger.add(stdout, level="DEBUG")
-
 
 def test_get_name():
     device = Device(system="system1", hardware="hardware1", group="group1", main=True, desc="")
