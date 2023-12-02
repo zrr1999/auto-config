@@ -25,13 +25,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Setup PDM
+    - name: Setup PDM 📦
       uses: pdm-project/setup-pdm@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Build package
+    - name: Build package 👷‍♂️
       run: pdm build -v --no-sdist
-    - name: "Upload wheels"
+    - name: Upload wheels 👷‍♂️
       uses: actions/upload-artifact@v3
       with:
         name: wheels
@@ -44,14 +44,20 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - name: Download wheels
+      - name: Download wheels 👷‍♂️
         uses: actions/download-artifact@v3
         with:
           name: wheels
           path: dist
-      - name: Publish to PyPi
+      - name: Publish to PyPi 🚀
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip-existing: true
           packages-dir: dist
           verbose: true
+
+      - name: Publish GitHub Release 📝
+        uses: softprops/action-gh-release@v1
+        with:
+          name: auto-config ${{github.ref_name}}
+          generate_release_notes: true
