@@ -9,7 +9,6 @@ class Device[ExtraT: BaseExtraField](BaseModel):
     system: str
     hardware: str
     group: str
-    main: bool = False
     desc: str = Field("")
 
     extra: ExtraT = Field(default_factory=BaseExtraField)

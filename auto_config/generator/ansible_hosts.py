@@ -18,11 +18,11 @@ class AnsibleHostsGenerator(GeneratorBase):
             group_hosts.setdefault(dev.group, [])
             group_hosts[dev.group].append(dev.get_name())
             if dev.extra.ansible is not None:
-                if dev.extra.ansible.router:
-                    group_hosts.setdefault("routers", [])
-                    group_hosts["routers"].append(dev.get_name())
-                    group_hosts.setdefault(f"router-{dev.group}", [])
-                    group_hosts[f"router-{dev.group}"].append(dev.get_name())
+                if dev.extra.ansible.server:
+                    group_hosts.setdefault("servers", [])
+                    group_hosts["servers"].append(dev.get_name())
+                    group_hosts.setdefault(f"server-{dev.group}", [])
+                    group_hosts[f"server-{dev.group}"].append(dev.get_name())
                 for alias in dev.extra.ansible.aliases:
                     group_hosts.setdefault(alias, [])
                     group_hosts[alias].append(dev.get_name())

@@ -14,12 +14,13 @@ class SSHField(BaseModel):
 
 
 class AnsibleField(BaseModel):
-    router: bool = False
+    server: bool = False
     aliases: list[str] = Field(default_factory=list)
 
 
 class DNSField(BaseModel):
-    target: str
+    public: str | None = None
+    private: str | None = None
 
 
 class DefaultExtraField(BaseExtraField):
