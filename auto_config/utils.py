@@ -21,8 +21,8 @@ def get_devices[T: BaseExtraField](
         try:
             extra_field_cls.model_validate(device.get("extra", {}))
             devices.append(Device[extra_field_cls].model_validate(device))
-        except ValidationError:
-            logger.warning(f"device {device} has invalid extra field")
+        except ValidationError as e:
+            logger.warning(f"device has invalid extra field: {e}")
             continue
     return devices
 
