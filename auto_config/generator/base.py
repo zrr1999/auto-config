@@ -51,5 +51,5 @@ class GeneratorBase:
         path = os.path.expanduser(path)
         path = os.path.expandvars(path)
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        logger.info(f"writed to {path}")
         open(path, "w").write(self.code)
+        logger.info(f"writed to {path}")

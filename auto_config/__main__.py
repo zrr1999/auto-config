@@ -11,7 +11,7 @@ app = typer.Typer()
 
 
 @app.command()
-def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level="INFO"):
+def generate_config(path: str = typer.Argument("~/.config/autoconfig/config.toml"), *, log_level="INFO"):
     logger.remove()
     logger.add(stdout, level=log_level)
     utils.generate_config(path)

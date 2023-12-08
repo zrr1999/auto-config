@@ -7,10 +7,15 @@ class BaseExtraField(BaseModel):
     pass
 
 
-class SSHField(BaseModel):
+class SSHHostField(BaseModel):
     port: int
     user: str
+    name: str | None = None
     forward_agent: bool = True
+
+
+class SSHField(SSHHostField):
+    containers: list[SSHHostField] = Field(default_factory=list)
 
 
 class AnsibleField(BaseModel):
