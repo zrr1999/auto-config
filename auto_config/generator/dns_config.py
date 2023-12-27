@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import Sequence
+from collections.abc import Sequence
 
 from ..device import Device
 from ..field import DefaultExtraField
@@ -17,10 +17,7 @@ class DNSConfigGenerator(GeneratorBase):
         record_list = []
         for device in self.devices:
             name = device.get_domain()
-            if device.extra.dns is not None:
-                target = device.extra.dns.public
-            else:
-                target = "unknown"
+            target = device.extra.dns.public if device.extra.dns is not None else "unknown"
             if device.extra.ansible is not None and device.extra.ansible.server:
                 record_list.append((device.group, f"{name}.bone6.top"))
             record_list.append((f"{name}", target))

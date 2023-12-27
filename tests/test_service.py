@@ -1,9 +1,5 @@
 from __future__ import annotations
 
-from sys import stdout
-
-from loguru import logger
-
 from auto_config.service import Service
 
 

@@ -1,12 +1,5 @@
 from __future__ import annotations
 
-from sys import stdout
-from typing import ParamSpec, TypeAlias, TypeVar, TypeVarTuple
-
-import typer
-from loguru import logger
-
-from auto_config.device import Device
 from auto_config.generator import (
     AnsibleHostsGenerator,
     CaddyFileGenerator,

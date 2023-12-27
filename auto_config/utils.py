@@ -39,7 +39,8 @@ def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level
     logger.add(stdout, level=log_level)
     path = os.path.expanduser(path)
     path = os.path.expandvars(path)
-    config = toml.load(open(path, "r"))
+    with open(path) as f:
+        config = toml.load(f)
     devices = get_devices(config["devices"], DefaultExtraField)
     generator = AnsibleHostsGenerator(devices)
     generator.write("~/.config/ansible/hosts")
