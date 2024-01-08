@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from .ansible_hosts import AnsibleHostsGenerator
 from .base import Block, GeneratorBase
 from .caddy_file import CaddyFileGenerator
