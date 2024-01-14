@@ -15,7 +15,7 @@ class SSHHostsGenerator(GeneratorBase):
         self.devices = devices
 
     def add_host(self, host_name: str, host_domain: str, desc: str, ssh_field: SSHHostField):
-        self.add_block(f"Host {host_name}", "\n", indentation=2)
+        self.add_block(f"Host {host_name}", indentation=2)
         self.add_line(f"HostName {host_domain}")
         self.add_line(f"Port {ssh_field.port}")
         self.add_line(f"User {ssh_field.user}")
@@ -31,7 +31,8 @@ class SSHHostsGenerator(GeneratorBase):
             self.add_host(device.get_name(), domain, device.desc, device.extra.ssh)
             logger.debug(f"added host {device.get_name()} to ssh config")
             for container in device.extra.ssh.containers:
-                name = container.name or f"{device.get_name()}-{container.port}"
+                container_name = container.name or str(container.port)
+                name = f"{device.get_name()}-{container_name}"
                 self.add_host(name, domain, f"{device.desc}: {name} 容器", container)
                 logger.debug(f"added container host {name} to ssh config")
 
