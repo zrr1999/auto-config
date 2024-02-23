@@ -47,4 +47,4 @@ def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level
     generator = SSHHostsGenerator(devices)
     generator.write("~/.ssh/config")
     generator = DNSConfigGenerator(devices)
-    generator.write("~/.config/autoconfig/auto-ddns.json")
+    generator.write("~/.config/dns-manager/ddns.json")

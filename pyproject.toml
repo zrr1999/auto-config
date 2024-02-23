@@ -6,10 +6,11 @@ authors = [
     {name = "Zhan Rongrui", email = "2742392377@qq.com"},
 ]
 dependencies = [
-    "pydantic",
-    "typer",
-    "loguru",
-    "toml"
+    "pydantic>=2.5.3",
+    "typer[all]>=0.9.0",
+    "loguru>=0.7.2",
+    "toml>=0.10.2",
+    "auto-token>=0.0.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -18,8 +19,6 @@ license = {text = "MIT"}
 [project.urls]
 Homepage = "https://pypi.org/project/auto-config"
 Repository = "https://github.com/zrr1999/auto-config.git"
-
-[project.optional-dependencies]
 
 [project.scripts]
 auto-config = "auto_config.__main__:app"
