@@ -23,7 +23,7 @@ def test_generator_base():
 
 def test_generator_init():
     devices = []
-    AnsibleHostsGenerator(devices)
-    SSHHostsGenerator(devices)
-    CaddyFileGenerator(devices)
-    DNSConfigGenerator(devices)
+    AnsibleHostsGenerator(devices).generate()
+    SSHHostsGenerator(devices).generate()
+    CaddyFileGenerator(devices).generate()
+    DNSConfigGenerator(devices).generate()

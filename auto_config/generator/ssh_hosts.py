@@ -19,7 +19,7 @@ class SSHHostsGenerator(GeneratorBase):
         self.add_line(f"HostName {host_domain}")
         self.add_line(f"Port {ssh_field.port}")
         self.add_line(f"User {ssh_field.user}")
-        self.add_line(f"ForwardAgent {"yes" if ssh_field.forward_agent else "no"}")
+        self.add_line(f"ForwardAgent {'yes' if ssh_field.forward_agent else 'no'}")
         self.add_line(f"#_Desc {desc}")
 
     def generate(self):
