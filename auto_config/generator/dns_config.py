@@ -23,6 +23,7 @@ class DNSConfigGenerator(GeneratorBase):
             name = device.get_domain()
             if self.filter_group is not None and device.group != self.filter_group:
                 ignored_record_list.append(name)
+                continue
             target = device.extra.dns.public if device.extra.dns is not None else "unknown"
             if device.extra.ansible is not None and device.extra.ansible.server:
                 record_list.append((device.group, f"{name}.bone6.top"))
