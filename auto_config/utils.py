@@ -34,7 +34,9 @@ def get_services(services_config: list[dict]) -> list[Service]:
     return services
 
 
-def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level="INFO"):
+def generate_config(
+    path: str = "~/.config/autoconfig/config.toml", *, group: str | None = None, log_level="INFO"
+):
     logger.remove()
     logger.add(stdout, level=log_level)
     path = os.path.expanduser(path)
@@ -46,5 +48,5 @@ def generate_config(path: str = "~/.config/autoconfig/config.toml", *, log_level
     generator.write("~/.config/ansible/hosts")
     generator = SSHHostsGenerator(devices)
     generator.write("~/.ssh/config")
-    generator = DNSConfigGenerator(devices)
+    generator = DNSConfigGenerator(devices, filter_group=group)
     generator.write("~/.config/dns-manager/ddns.json")
