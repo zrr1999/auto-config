@@ -18,13 +18,16 @@ class DNSConfigGenerator(GeneratorBase):
 
     def generate(self):
         record_list = []
+        ignored_record_list = []
         for device in self.devices:
-            if self.filter_group is not None and device.group != self.filter_group:
-                continue
             name = device.get_domain()
+            if self.filter_group is not None and device.group != self.filter_group:
+                ignored_record_list.append(name)
             target = device.extra.dns.public if device.extra.dns is not None else "unknown"
             if device.extra.ansible is not None and device.extra.ansible.server:
                 record_list.append((device.group, f"{name}.bone6.top"))
             record_list.append((f"{name}", target))
 
-        self._generated_code = json.dumps({"domain": "bone6.top", "records": record_list}, indent=2)
+        self._generated_code = json.dumps(
+            {"domain": "bone6.top", "records": record_list, "ignore": ignored_record_list}, indent=2
+        )
