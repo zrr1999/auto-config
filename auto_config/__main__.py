@@ -15,12 +15,12 @@ app = typer.Typer()
 def generate_config(
     path: str = typer.Argument("~/.config/autoconfig/config.toml"),
     *,
-    group: Optional[str] = None,
+    groups: Optional[list[str]] = None,
     log_level="INFO",
 ):
     logger.remove()
     logger.add(stdout, level=log_level)
-    utils.generate_config(path, group=group)
+    utils.generate_config(path, groups=groups)
 
 
 if __name__ == "__main__":

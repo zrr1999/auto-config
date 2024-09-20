@@ -10,18 +10,21 @@ from .base import GeneratorBase
 
 class DNSConfigGenerator(GeneratorBase):
     def __init__(
-        self, devices: Sequence[Device[DefaultExtraField]], *, filter_group: str | None = None
+        self,
+        devices: Sequence[Device[DefaultExtraField]],
+        *,
+        filter_groups: list[str] | None = None,
     ):
         super().__init__()
         self.devices = devices
-        self.filter_group = filter_group
+        self.filter_groups = filter_groups
 
     def generate(self):
         record_list = []
         ignored_record_list = []
         for device in self.devices:
             name = device.get_domain()
-            if self.filter_group is not None and device.group != self.filter_group:
+            if self.filter_groups is not None and device.group not in self.filter_groups:
                 ignored_record_list.append(name)
                 continue
             target = device.extra.dns.public if device.extra.dns is not None else "unknown"
