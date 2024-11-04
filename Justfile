@@ -12,7 +12,7 @@ pyright:
     uv run pyright .
 
 test:
-    uv run pytest --cov=nanoflow --codspeed --xdoc
+    uv run pytest --cov=auto_config --codspeed --xdoc
     uv run coverage xml
 
 check:

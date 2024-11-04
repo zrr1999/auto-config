@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 __version__.py
+
+.codspeed/

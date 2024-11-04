@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from auto_config.generator import (
     AnsibleHostsGenerator,
     CaddyFileGenerator,
@@ -9,6 +11,7 @@ from auto_config.generator import (
 )
 
 
+@pytest.mark.benchmark
 def test_generator_base():
     generator = GeneratorBase()
     generator.add_line("line1")
@@ -21,6 +24,7 @@ def test_generator_base():
     # generator.write("path")
 
 
+@pytest.mark.benchmark
 def test_generator_init():
     devices = []
     AnsibleHostsGenerator(devices).generate()
