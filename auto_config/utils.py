@@ -51,5 +51,5 @@ def generate_config(
     generator.write("~/.config/ansible/hosts")
     generator = SSHHostsGenerator(devices)
     generator.write("~/.ssh/config")
-    generator = DNSConfigGenerator(devices, filter_groups=groups)
+    generator = DNSConfigGenerator(devices, extra_groups=groups)
     generator.write("~/.config/dns-manager/ddns.json")
