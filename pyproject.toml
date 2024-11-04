@@ -28,15 +28,18 @@ source = "scm"
 write_to = "auto_config/__version__.py"
 write_template = "__version__ = '{}'"
 
-[tool.pdm.dev-dependencies]
-test = [
-    "pytest",
-    "pytest-mock",
-    "coverage",
-]
-
 [tool.pdm.build]
 includes = ["auto_config"]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+    "xdoctest",
+    "pytest",
+    "pytest-mock",
+    "pytest-cov",
+    "pytest-codspeed",
+]
 
 [tool.ruff]
 line-length = 100

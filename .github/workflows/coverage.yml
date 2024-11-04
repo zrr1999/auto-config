@@ -14,22 +14,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PDM
-        uses: pdm-project/setup-pdm@v3
+      - uses: actions/checkout@v4
+      - name: Setup Just 📦
+        uses: extractions/setup-just@v2
+      - name: Install the latest version of uv 📦
+        uses: astral-sh/setup-uv@v2
+      - name: Install python 📦
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: pdm install
-
+          python-version: '3.12'
+      - name: Install dependencies 📦
+        run: just install
       - name: Run tests and coverage
         run: |
-          pdm run coverage run -m pytest tests
-          pdm run coverage html --show-contexts --title "Coverage for ${{ github.sha }}"
-
+          uv run coverage run -m pytest tests
+          uv run coverage html --show-contexts --title "Coverage for ${{ github.sha }}"
       - name: Store coverage HTML
         uses: actions/upload-artifact@v3
         with:

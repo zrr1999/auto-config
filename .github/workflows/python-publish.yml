@@ -18,20 +18,18 @@ jobs:
   build:
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-        # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        target-version: [py310, py311, py312]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup PDM 📦
-        uses: pdm-project/setup-pdm@v3
-        with:
-          python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v4
+      - name: Install the latest version of uv 📦
+        uses: astral-sh/setup-uv@v2
       - name: Build package 👷‍♂️
-        run: pdm build -v --no-sdist
+        run: uv build --wheel
+        env:
+          PYFUTURE_TARGET: ${{ matrix.target-version }}
       - name: Upload wheels 👷‍♂️
         uses: actions/upload-artifact@v3
         with:
